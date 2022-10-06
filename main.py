@@ -36,7 +36,7 @@ def change_dot(a):
     for u in winning_strategy:
         # print(a)
         k = u + a
-        if k >= 8:
+        while k >= 8:
             k = k - 8
         if k == 0 or k == 7:
             startORend(k)
