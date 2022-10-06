@@ -48,7 +48,7 @@ def change_dot(a):
                     l[k - 1 + o] = 0
         # a = random.randint(0, 7)
 
-        print(l[0], " ",  l[1], ' ' , l[2], '\n')
+        print(l[0], " ",  l[1], ' ', l[2], '\n')
         print(l[7], " ", " ", ' ', l[3], '\n')
         print(l[6], " ", l[5], ' ', l[4], '\n')
 
