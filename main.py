@@ -7,7 +7,7 @@ class Root(Tk):
         super(Root, self).__init__()
 
         self.title("Игра: 8 точек")
-        self.minsize(500, 400)
+        self.minsize(800, 600)
 
 
 root = Root()
@@ -21,7 +21,9 @@ e1 = Entry(textvariable=value)
 def get_int(event):
     get = value.get()
     l1["text"] = get
-    print("jopa")
+    print("new")
+    change_dot(int(get))
+
 
 b1.bind('<Button-1>', get_int)
 
@@ -81,7 +83,7 @@ def change_dot(a):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    change_dot(int(input()))
+    #change_dot(int(input()))
 
     root.mainloop()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
