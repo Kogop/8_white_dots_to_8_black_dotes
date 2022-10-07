@@ -1,8 +1,19 @@
 # This is a sample Python script.
 import random
+from tkinter import *
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+class Root(Tk):
+    def __init__(self):
+        super(Root, self).__init__()
+
+        self.title("Игра: восемь точек")
+        self.minsize(800, 600)
+
+
+
+
+
 l = [0, 0, 0, 0, 0, 0, 0, 0]
 winning_strategy = [0, 4, 2, 6, 1, 5, 7, 3]
 
@@ -48,7 +59,7 @@ def change_dot(a):
                     l[k - 1 + o] = 0
         # a = random.randint(0, 7)
 
-        print(l[0], " ",  l[1], ' ', l[2], '\n')
+        print(l[0], " ", l[1], ' ', l[2], '\n')
         print(l[7], " ", " ", ' ', l[3], '\n')
         print(l[6], " ", l[5], ' ', l[4], '\n')
 
@@ -56,5 +67,7 @@ def change_dot(a):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     change_dot(int(input()))
+    root = Root()
+    root.mainloop()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
