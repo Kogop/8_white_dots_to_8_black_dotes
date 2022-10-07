@@ -1,14 +1,33 @@
 # This is a sample Python script.
 from tkinter import *
 
+
 class Root(Tk):
     def __init__(self):
-        super(Root,self).__init__()
+        super(Root, self).__init__()
 
         self.title("Игра: 8 точек")
-        self.minsize(500,400)
+        self.minsize(500, 400)
+
+
 root = Root()
 
+value = IntVar()
+b1 = Button(text="ok")
+l1 = Label(text="white")
+e1 = Entry(textvariable=value)
+
+
+def get_int(event):
+    get = value.get()
+    l1["text"] = get
+    print("jopa")
+
+b1.bind('<Button-1>', get_int)
+
+l1.grid(row=1, column=1)
+e1.grid(row=2, column=1)
+b1.grid(row=3, column=1)
 
 matrix = [0, 0, 0, 0, 0, 0, 0, 0]
 winning_strategy = [0, 4, 2, 6, 1, 5, 7, 3]
