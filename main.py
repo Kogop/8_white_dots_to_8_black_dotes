@@ -1,5 +1,13 @@
 # This is a sample Python script.
-# import random
+from tkinter import *
+
+class Root(Tk):
+    def __init__(self):
+        super(Root,self).__init__()
+
+        self.title("Игра: 8 точек")
+        self.minsize(500,400)
+root = Root()
 
 
 matrix = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -56,4 +64,5 @@ def change_dot(a):
 if __name__ == '__main__':
     change_dot(int(input()))
 
+    root.mainloop()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
