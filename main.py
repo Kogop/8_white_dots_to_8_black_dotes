@@ -1,5 +1,6 @@
 # This is a sample Python script.
 from tkinter import *
+import ui
 
 
 class Root(Tk):
@@ -7,29 +8,15 @@ class Root(Tk):
         super(Root, self).__init__()
 
         self.title("Игра: 8 точек")
-        self.minsize(800, 600)
-
-
-root = Root()
-
-value = IntVar()
-b1 = Button(text="ok")
-l1 = Label(text="white")
-e1 = Entry(textvariable=value)
+        self.minsize(200, 200)
 
 
 def get_int(event):
     get = value.get()
-    l1["text"] = get
+
     print("new")
     change_dot(int(get))
-
-
-b1.bind('<Button-1>', get_int)
-
-l1.grid(row=1, column=1)
-e1.grid(row=2, column=1)
-b1.grid(row=3, column=1)
+    l1["text"] = "new",'\n', matrix[0], matrix[1], matrix[2], '\n', matrix[7],  " ",  matrix[3], '\n', matrix[6],  matrix[5],  matrix[4], '\n'
 
 matrix = [0, 0, 0, 0, 0, 0, 0, 0]
 winning_strategy = [0, 4, 2, 6, 1, 5, 7, 3]
@@ -83,7 +70,19 @@ def change_dot(a):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    #change_dot(int(input()))
+    # change_dot(int(input()))
+    root = Root()
+
+    value = IntVar()
+    b1 = Button(text="ok")
+    l1 = Label(text="white")
+    e1 = Entry(textvariable=value)
+
+    b1.bind('<Button-1>', get_int)
+
+    l1.pack()
+    e1.pack()
+    b1.pack()
 
     root.mainloop()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
