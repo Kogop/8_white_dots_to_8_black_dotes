@@ -1,7 +1,10 @@
 # This is a sample Python script.
 from tkinter import *
-import ui
 
+import ui
+from ui import *
+from PyQt6.QtWidgets import QApplication, QWidget
+import sys
 
 class Root(Tk):
     def __init__(self):
@@ -16,7 +19,7 @@ def get_int(event):
 
     print("new")
     change_dot(int(get))
-    l1["text"] = "new",'\n', matrix[0], matrix[1], matrix[2], '\n', matrix[7],  " ",  matrix[3], '\n', matrix[6],  matrix[5],  matrix[4], '\n'
+    l1["text"] = "new", '\n', matrix[0], matrix[1], matrix[2], '\n', matrix[7], " ", matrix[3], '\n', matrix[6],  matrix[5], matrix[4], '\n'
 
 matrix = [0, 0, 0, 0, 0, 0, 0, 0]
 winning_strategy = [0, 4, 2, 6, 1, 5, 7, 3]
@@ -85,4 +88,11 @@ if __name__ == '__main__':
     b1.pack()
 
     root.mainloop()
+
+    app = QApplication(sys.argv)
+    window = QWidget()
+    window.show()
+    app.exec()
+    ui.Ui_MainWindow.setupUi()
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
