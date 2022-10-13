@@ -2,7 +2,7 @@
 from tkinter import *
 
 import ui
-from ui import *
+
 from PyQt6.QtWidgets import QApplication, QWidget
 import sys
 
