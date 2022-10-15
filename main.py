@@ -4,22 +4,25 @@ from tkinter import *
 import ui
 
 from PyQt6.QtWidgets import QApplication, QWidget
-import sys
+
+
 
 class Root(Tk):
     def __init__(self):
         super(Root, self).__init__()
 
         self.title("Игра: 8 точек")
-        self.minsize(200, 200)
+        self.minsize(300, 300)
 
 
 def get_int(event):
     get = value.get()
 
     print("new")
-    change_dot(int(get))
-    l1["text"] = "new", '\n', matrix[0], matrix[1], matrix[2], '\n', matrix[7], " ", matrix[3], '\n', matrix[6],  matrix[5], matrix[4], '\n'
+    change_dot_0(int(get))
+    l1["text"] = "new", '\n', matrix[0], matrix[1], matrix[2], '\n', matrix[7], " ", matrix[3], '\n', matrix[6], matrix[
+        5], matrix[4], '\n'
+
 
 matrix = [0, 0, 0, 0, 0, 0, 0, 0]
 winning_strategy = [0, 4, 2, 6, 1, 5, 7, 3]
@@ -49,7 +52,24 @@ def start_or_end(a):
             matrix[6] = 0
 
 
-def change_dot(a):
+def change_dot_1(a):
+    win_strat_1 = [1, 4, 7]
+    for u in win_strat_1:
+        k = u + a
+        while k >= 8:
+            k = k - 8
+        if k == 0 or k == 7:
+            start_or_end(k)
+        else:
+            for o in range(0, 3):
+                if matrix[k - 1 + o] != 1:
+                    matrix[k - 1 + o] = 1
+                else:
+                    matrix[k - 1 + o] = 0
+
+
+# solve with 0 placed
+def change_dot_0(a):
     # while (matrix.count(1) != 8 or matrix.count(0) != 8):
     for u in winning_strategy:
         # print(a)
@@ -89,7 +109,7 @@ if __name__ == '__main__':
 
     root.mainloop()
 
-    app = QApplication(sys.argv)
+    app = QApplication()
     window = QWidget()
     window.show()
     app.exec()
