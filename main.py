@@ -1,9 +1,9 @@
 # This is a sample Python script.
 from tkinter import *
 
-import ui
+#import ui
 
-from PyQt6.QtWidgets import QApplication, QWidget
+#from PyQt6.QtWidgets import QApplication, QWidget
 
 
 class Root(Tk):
@@ -59,7 +59,10 @@ def start_or_end(a):
 
 def change_dot_1(a):
     #matrix = [0, 0, 0, 0, 0, 0, 0, 0]
-    matrix[a] = 1
+    if matrix[a] != 1:
+        matrix[a] = 1
+    else:
+        matrix[a] = 0
     win_strat_1 = [1, 4, 7]
     for u in win_strat_1:
         k = u + a
