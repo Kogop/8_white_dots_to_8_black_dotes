@@ -6,7 +6,6 @@ import ui
 from PyQt6.QtWidgets import QApplication, QWidget
 
 
-
 class Root(Tk):
     def __init__(self):
         super(Root, self).__init__()
@@ -15,11 +14,13 @@ class Root(Tk):
         self.minsize(300, 300)
 
 
-def get_int(event):
+def get_dots(event):
     get = value.get()
 
     print("new")
-    change_dot_0(int(get))
+    match get:
+        case 1:
+            change_dot_1(1)
     l1["text"] = "new", '\n', matrix[0], matrix[1], matrix[2], '\n', matrix[7], " ", matrix[3], '\n', matrix[6], matrix[
         5], matrix[4], '\n'
 
@@ -53,6 +54,7 @@ def start_or_end(a):
 
 
 def change_dot_1(a):
+    matrix[a] = 1
     win_strat_1 = [1, 4, 7]
     for u in win_strat_1:
         k = u + a
@@ -66,6 +68,9 @@ def change_dot_1(a):
                     matrix[k - 1 + o] = 1
                 else:
                     matrix[k - 1 + o] = 0
+        print(matrix[0], " ", matrix[1], ' ', matrix[2], '\n')
+        print(matrix[7], " ", " ", ' ', matrix[3], '\n')
+        print(matrix[6], " ", matrix[5], ' ', matrix[4], '\n')
 
 
 # solve with 0 placed
@@ -97,22 +102,28 @@ if __name__ == '__main__':
     root = Root()
 
     value = IntVar()
+    value1 = IntVar()
     b1 = Button(text="ok")
-    l1 = Label(text="white")
+    l1 = Label(text="matrix")
+    l2 = Label(text="how much 1?")
+    l3 = Label(text="where 1?")
     e1 = Entry(textvariable=value)
-
-    b1.bind('<Button-1>', get_int)
+    e2 = Entry(textvariable=value1)
+    b1.bind('<Button-1>', get_dots)
 
     l1.pack()
+    l2.pack()
     e1.pack()
+    l3.pack()
+    e2.pack()
     b1.pack()
 
     root.mainloop()
-
-    app = QApplication()
-    window = QWidget()
-    window.show()
-    app.exec()
-    ui.Ui_MainWindow.setupUi()
+    #
+    # app = QApplication()
+    # window = QWidget()
+    # window.show()
+    # app.exec()
+    # ui.Ui_MainWindow.setupUi()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
