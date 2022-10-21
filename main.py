@@ -26,14 +26,6 @@ def get_dots(event):
     solve(place_get2)
     place_get2.clear()
 
-    # match amount_get:
-    #     case 0:
-    #         change_dot_0(int(place_get1))
-    #     case 1:
-    #         change_dot_1(int(place_get1))
-    #     case _:
-    #         print("jopa")
-
 
 def ltext(li):
     l1["text"] = "new", '\n', li[0], li[1], li[2], '\n', li[7], " ", li[3], '\n', li[6], li[5], li[4], '\n'
@@ -91,10 +83,10 @@ def start_or_end(a, li):
 
 def change_dot_1(x, li):
     # matrix = [0, 0, 0, 0, 0, 0, 0, 0]
-    if li[x] != 1:
-        li[x] = 1
-    else:
-        li[x] = 0
+    # if li[x] != 1:
+    #     li[x] = 1
+    # else:
+    #     li[x] = 0
     win_strat_1 = [1, 4, 7]
     for u in win_strat_1:
         k = u + x
@@ -114,6 +106,7 @@ def change_dot_1(x, li):
         print(li[7], " ", " ", ' ', li[3], '\n')
         print(li[6], " ", li[5], ' ', li[4], '\n')
     ltext(li)
+
 
 # matrix = [0, 0, 0, 0, 0, 0, 0, 0]
 def change_singe_dot(k, li):
@@ -162,7 +155,8 @@ def change_dot_any(a):
             if u == 1 and a[u + 1] == 1:
                 change_singe_dot(a, u)
             counter = counter + 1
-    #ltext(a)
+    # ltext(a)
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
