@@ -51,8 +51,6 @@ def solve(a):
             change_dot_0(random.randint(0, 7), a)
         case 1:
             change_dot_1(a.index(1), a)
-        case 2, 3, 4, 5, 6, 7:
-            change_dot_any(a)
         case _:
             change_dot_any(a)
             print("jopa")
@@ -154,8 +152,12 @@ def change_dot_any(li):
         counter = 0
         if li.count(1) >= 3:    #clear any 3 consecutive 1
             for p in range(1, 6):
-                if li[p] == 1 and li[p + 1] == 1 and li[p - 1] == 1:
-                    change_singe_dot(p, li)
+                print(1)
+                if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 1:
+                    li[p-1] = 0
+                    li[p] = 0
+                    li[p+1] = 0
+                    #change_singe_dot(p, li)
         if li.count(1) == 0:
             change_dot_0(0, li)
             break
@@ -163,7 +165,7 @@ def change_dot_any(li):
             change_dot_1(li.index(1), li)
             break
         for p in range(1, 6):  #change 2 consecutive 1 into 0 and 0 on the side to 1
-            if li[p] == 1 and li[p + 1] == 1 and li[p - 1] == 0:
+            if li[p - 1] == 0 and li[p] == 1 and li[p + 1] == 1:
                 change_singe_dot(p, li)
             if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 0:
                 change_singe_dot(p, li)
@@ -174,10 +176,10 @@ def change_dot_any(li):
             change_dot_1(li.index(1), li)
             break
         for p in range(1, 6):  # change 1 consecutive 1 into 0 and 2 0 on the side to 1
-            if li[p] == 0 and li[p + 1] == 1 and li[p - 1] == 0:
+            if li[p - 1] == 0 and li[p] == 0 and li[p + 1] == 1:
                 change_singe_dot(p, li)
-            if li[p - 1] == 1 and li[p] == 0 and li[p + 1] == 1:
-                change_singe_dot(p, li)
+            #if li[p - 1] == 1 and li[p] == 0 and li[p + 1] == 1:
+               # change_singe_dot(p, li)
         if li.count(1) == 0:
             change_dot_0(0, li)
             break
