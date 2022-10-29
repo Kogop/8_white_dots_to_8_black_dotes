@@ -150,14 +150,18 @@ def change_dot_0(a, li):
 def change_dot_any(li):
     while li.count(1) != 8 or li.count(0) != 8:
         counter = 0
+
         if li.count(1) >= 3:    #clear any 3 consecutive 1
             for p in range(1, 6):
-                print(1)
+                #print(1)
                 if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 1:
                     li[p-1] = 0
                     li[p] = 0
                     li[p+1] = 0
-                    #change_singe_dot(p, li)
+            if li[7] == 1 and li[0] == 1 and li[1] == 1:
+                    li[7] = 0
+                    li[0] = 0
+                    li[1] = 0       #change_singe_dot(p, li)
         if li.count(1) == 0:
             change_dot_0(0, li)
             break
@@ -167,7 +171,9 @@ def change_dot_any(li):
         for p in range(1, 6):  #change 2 consecutive 1 into 0 and 0 on the side to 1
             if li[p - 1] == 0 and li[p] == 1 and li[p + 1] == 1:
                 change_singe_dot(p, li)
-            if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 0:
+            if li[p-1] == 1 and li[p] == 1 and li[p+1] == 0:
+                change_singe_dot(p, li)
+            if li[p-1] == 1 and li[p] == 0 and li[p+1] == 1:
                 change_singe_dot(p, li)
         if li.count(1) == 0:
             change_dot_0(0, li)
@@ -187,27 +193,23 @@ def change_dot_any(li):
             change_dot_1(li.index(1), li)
             break
         if li.count(1) == 2:
-            for p in range(1, 6):
-                if li[p] == 1 and li[p + 1] == 1 and li[p - 1] == 0:
-                    change_singe_dot(p, li)
-                    change_dot_1(li.index(1), li)
-                    break
-                if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 0:
-                    change_singe_dot(p, li)
-                    change_dot_1(li.index(1), li)
-                    break
-            if li[0] == 1 and li[7] == 1 and li[1] == 0:
+            # for p in range(1, 6):
+            #     if li[p] == 1 and li[p + 1] == 1 and li[p - 1] == 0:
+            #         change_singe_dot(p, li)
+            #         change_dot_1(li.index(1), li)
+            #         break
+            #     if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 0:
+            #         change_singe_dot(p, li)
+            #         change_dot_1(li.index(1), li)
+            #         break
+            if li[0] == 1 and li[7] == 1:
                 li[0] = 0
                 li[7] = 0
                 li[1] = 1
                 change_dot_1(1, li)
                 break
-            if li[0] == 1 and li[7] == 1 and li[6] == 0:
-                li[0] = 0
-                li[7] = 0
-                li[6] = 1
-                change_dot_1(6, li)
-                break
+            if li[7] == 1 and li[0] == 0 and li[1] == 1:
+                change_singe_dot(0, li)
             print(li[0], " ", li[1], ' ', li[2], '\n')
             print(li[7], " ", " ", ' ', li[3], '\n')
             print(li[6], " ", li[5], ' ', li[4], '\n')
