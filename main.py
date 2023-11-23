@@ -14,7 +14,7 @@ class Root(Tk):
         super(Root, self).__init__()
 
         self.title("Игра: 8 точек")
-        self.minsize(300, 300)
+        self.minsize(400, 400)
 
 
 def get_dots(event):
@@ -55,7 +55,6 @@ def ltext(li):
         l5["text"] = ftext
         # l5["text"] = "new", '\n', li[0], li[1], li[2], '\n', li[7], " ", li[3], '\n', li[6], li[5], li[4], '\n'
     else:
-
         l5["text"] = ""
 
 
@@ -255,26 +254,45 @@ if __name__ == '__main__':
     # change_dot(int(input()))
     root = Root()
 
+    gameFrame = Frame(root, height=500, background="gray")
+    gameFrame.pack(side='top', fill='x')
     # amount_value = IntVar()
+
+    l1 = Label(gameFrame, text="matrix")
+    l1.grid(row=1, column=1)
+
+    l3 = Label(gameFrame, text="type in whole circle")
+    l3.grid(row=2, column=1, columnspan=2)
+
     place_value = StringVar()
-    b1 = Button(text="ok")
-    l1 = Label(text="matrix")
-    l2 = Label(text="")
-    l3 = Label(text="type in whole circle")
-    # e1 = Entry(textvariable=amount_value)
-    e2 = Entry(textvariable=place_value)
+    e2 = Entry(gameFrame, textvariable=place_value)
+    e2.grid(row=3, column=1, columnspan=2)
+
+    b1 = Button(gameFrame, text="ok")
     b1.bind('<Button-1>', get_dots)
+    b1.grid(row=4, column=1, columnspan=2)
 
-    l5 = Label(text="")
+
+    resultFrame = Frame(root, height= 200, background="white")
+    resultFrame.pack(side='bottom', fill='both', expand=1)
+
+    l2 = Label(gameFrame, text="place for error message")
+    l2.grid(row=1, column=3)
+    # e1 = Entry(textvariable=amount_value)
 
 
-    l1.pack()
-    l2.pack()
+
+
+    l5 = Label(resultFrame, text="")
+    l5.grid(row=2, column=1)
+
+    # l1.pack()
+    # l2.pack()
     # e1.pack()
-    l3.pack()
-    e2.pack()
-    b1.pack()
-    l5.pack()
+    # l3.pack()
+    # e2.pack()
+    # b1.pack()
+    # l5.pack()
 
     # hhhhh
     root.mainloop()
