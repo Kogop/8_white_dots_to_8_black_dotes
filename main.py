@@ -254,37 +254,43 @@ if __name__ == '__main__':
     # change_dot(int(input()))
     root = Root()
 
-    gameFrame = Frame(root, height=500, background="gray")
-    gameFrame.pack(side='top', fill='x')
+    testFrame = Frame(root, height=500, background="gray")
+    testFrame.grid(row=1, column=1)
     # amount_value = IntVar()
 
-    l1 = Label(gameFrame, text="matrix")
+    l1 = Label(testFrame, text="matrix")
     l1.grid(row=1, column=1)
 
-    l3 = Label(gameFrame, text="type in whole circle")
+    l3 = Label(testFrame, text="type in whole circle")
     l3.grid(row=2, column=1, columnspan=2)
 
     place_value = StringVar()
-    e2 = Entry(gameFrame, textvariable=place_value)
+    e2 = Entry(testFrame, textvariable=place_value)
     e2.grid(row=3, column=1, columnspan=2)
 
-    b1 = Button(gameFrame, text="ok")
+    b1 = Button(testFrame, text="ok")
     b1.bind('<Button-1>', get_dots)
     b1.grid(row=4, column=1, columnspan=2)
 
+    # another frame
+    resultFrame = Frame(root, height=200, background="white")
+    resultFrame.grid(row=2, column=1)
 
-    resultFrame = Frame(root, height= 200, background="white")
-    resultFrame.pack(side='bottom', fill='both', expand=1)
-
-    l2 = Label(gameFrame, text="place for error message")
+    l2 = Label(testFrame, text="place for error message")
     l2.grid(row=1, column=3)
     # e1 = Entry(textvariable=amount_value)
 
-
-
-
     l5 = Label(resultFrame, text="")
     l5.grid(row=2, column=1)
+
+    # frame with actual game
+
+    gameFrame = Frame(root, height=300, width=300, background="blue")
+    gameFrame.grid(row=1, column=2, rowspan=2)
+
+    gameFrame_b1 = Button(gameFrame, text="ok")
+    gameFrame_b1.bind('<Button-1>', get_dots)
+    gameFrame_b1.grid(row=1, column=1, columnspan=2)
 
     # l1.pack()
     # l2.pack()
@@ -295,7 +301,7 @@ if __name__ == '__main__':
     # l5.pack()
 
     # hhhhh
-    root.mainloop()
+
     #
     # app = QApplication()
     # window = QWidget()
@@ -303,4 +309,5 @@ if __name__ == '__main__':
     # app.exec()
     # ui.Ui_MainWindow.setupUi()
 
+    root.mainloop()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
