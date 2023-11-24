@@ -3,8 +3,11 @@ from tkinter import *
 from typing import List, Any
 import random
 
-
 # import ui
+
+import test_functions as f
+import game_function as g
+
 
 # from PyQt6.QtWidgets import QApplication, QWidget
 
@@ -18,7 +21,7 @@ class Root(Tk):
 
 
 def get_dots(event):
-    ltext(False)
+    l5["text"] = f.ltext(False)
     error_text("")
     place_get1 = place_value.get()
     print(type(place_get1))
@@ -34,10 +37,10 @@ def get_dots(event):
         # amount_get = amount_value.get()
         print("new")
         if place_get1:
-            place_get2 = StrIntoList(place_get1)
+            place_get2 = f.StrIntoList(place_get1)
             print(place_get2)
-            solve(place_get2)
-            b1["text"] = "pop"
+            l5["text"] = f.solve(place_get2)
+            # b1["text"] = "pop"
             place_get2.clear()
     else:
         error_text("введите строку из 8 символов состоящую только из комбинаций 1 или 0")
@@ -47,207 +50,73 @@ def error_text(error):
     l2["text"] = error
 
 
-def ltext(li):
-    print(li)
-    if li:
-        ftext = f"new \n {li[0]}, {li[1]}, {li[2]} \n {li[7]},  , {li[3]} \n {li[6]}, {li[5]}, {li[4]}, \n"
-        # text = "".join(("new", '\n', li[0], li[1], li[2], '\n', li[7], " ", li[3], '\n', li[6], li[5], li[4], '\n'))
-        l5["text"] = ftext
-        # l5["text"] = "new", '\n', li[0], li[1], li[2], '\n', li[7], " ", li[3], '\n', li[6], li[5], li[4], '\n'
-    else:
-        l5["text"] = ""
-
-
-matrix = [0, 0, 0, 0, 0, 0, 0, 0]
-winning_strategy = [0, 4, 2, 6, 1, 5, 7, 3]
-newList: list[Any] = []
-
-
-def StrIntoList(a):
-    for u in a:
-        newList.append(int(u))
-        # print(newList)
-    return newList
-
-
-def solve(a):
-    amount = a.count(1)
-    # print(amount)
-    match amount:
-        case 0:
-            change_dot_0(random.randint(0, 7), a)
+def game_btn_press(num):
+    match num:
         case 1:
-            change_dot_1(a.index(1), a)
+            g.change_text(gameFrame_b1)
+            g.change_text(gameFrame_b2)
+            g.change_text(gameFrame_b8)
+        case 2:
+            g.change_text(gameFrame_b1)
+            g.change_text(gameFrame_b2)
+            g.change_text(gameFrame_b3)
+        case 3:
+            g.change_text(gameFrame_b2)
+            g.change_text(gameFrame_b3)
+            g.change_text(gameFrame_b4)
+        case 4:
+            g.change_text(gameFrame_b3)
+            g.change_text(gameFrame_b4)
+            g.change_text(gameFrame_b5)
+        case 5:
+            g.change_text(gameFrame_b4)
+            g.change_text(gameFrame_b5)
+            g.change_text(gameFrame_b6)
+        case 6:
+            g.change_text(gameFrame_b5)
+            g.change_text(gameFrame_b6)
+            g.change_text(gameFrame_b7)
+        case 7:
+            g.change_text(gameFrame_b6)
+            g.change_text(gameFrame_b7)
+            g.change_text(gameFrame_b8)
+        case 8:
+            g.change_text(gameFrame_b7)
+            g.change_text(gameFrame_b8)
+            g.change_text(gameFrame_b1)
         case _:
-            change_dot_any(a)
-            print("jopa")
+            return 0
 
 
-def start_or_end(a, li):
-    if li[7] != 1:
-        li[7] = 1
-    else:
-        li[7] = 0
+def game_btn_press_single(num):
+    match num:
+        case 1:
+            g.change_text(placementFrame_b1)
+        case 2:
+            g.change_text(placementFrame_b2)
+        case 3:
+            g.change_text(placementFrame_b3)
+        case 4:
+            g.change_text(placementFrame_b4)
+        case 5:
+            g.change_text(placementFrame_b5)
+        case 6:
+            g.change_text(placementFrame_b6)
+        case 7:
+            g.change_text(placementFrame_b7)
+        case 8:
+            g.change_text(placementFrame_b8)
+        case _:
+            return 0
 
-    if li[0] != 1:
-        li[0] = 1
-    else:
-        li[0] = 0
+def solve_from_this_position(str1, str2, str3, str4, str5, str6, str7, str8):
+    text = f"{str1}{str2}{str3}{str4}{str5}{str6}{str7}{str8}"
+    text = text.replace("pop", "0")
+    text = text.replace("ok", "1")
 
-    if a == 0:
-        if li[1] != 1:
-            li[1] = 1
-        else:
-            li[1] = 0
-
-    if a == 7:
-        if li[6] != 1:
-            li[6] = 1
-        else:
-            li[6] = 0
-
-
-def change_dot_1(x, li):
-    # matrix = [0, 0, 0, 0, 0, 0, 0, 0]
-    # if li[x] != 1:
-    #     li[x] = 1
-    # else:
-    #     li[x] = 0
-    win_strat_1 = [1, 4, 7]
-    for u in win_strat_1:
-        k = u + x
-        while k >= 8:
-            k = k - 8
-        if k == 0 or k == 7:
-            start_or_end(k, li)
-        else:
-            for o in range(0, 3):
-                if li[k - 1 + o] != 1:
-                    li[k - 1 + o] = 1
-                else:
-                    li[k - 1 + o] = 0
-            # a = random.randint(0, 7)
-
-        print(li[0], " ", li[1], ' ', li[2], '\n')
-        print(li[7], " ", " ", ' ', li[3], '\n')
-        print(li[6], " ", li[5], ' ', li[4], '\n')
-    ltext(li)
-
-
-# matrix = [0, 0, 0, 0, 0, 0, 0, 0]
-def change_singe_dot(k, li):
-    while k >= 8:
-        k = k - 8
-    if k == 0 or k == 7:
-        start_or_end(k, li)
-    else:
-        for o in range(0, 3):  # I can do only else statement since I always start with zeros now
-            if li[k - 1 + o] != 1:
-                li[k - 1 + o] = 1
-            else:
-                li[k - 1 + o] = 0
-    # a = random.randint(0, 7)
-
-
-# solve with 0 placed
-def change_dot_0(a, li):
-    # while (matrix.count(1) != 8 or matrix.count(0) != 8):
-
-    for u in winning_strategy:
-        # print(a)
-        k = u + a
-        while k >= 8:
-            k = k - 8
-        if k == 0 or k == 7:
-            start_or_end(k, li)
-        else:
-            for o in range(0, 3):
-                if li[k - 1 + o] != 1:
-                    li[k - 1 + o] = 1
-                else:
-                    li[k - 1 + o] = 0
-        # a = random.randint(0, 7)
-
-        print(li[0], " ", li[1], ' ', li[2], '\n')
-        print(li[7], " ", " ", ' ', li[3], '\n')
-        print(li[6], " ", li[5], ' ', li[4], '\n')
-    ltext(li)
-
-
-def change_dot_any(li):
-    while li.count(1) != 8 or li.count(0) != 8:
-        counter = 0
-
-        if li.count(1) >= 3:  # clear any 3 consecutive 1
-            # print("vsmisle")
-            for p in range(1, 7):
-                # print(p)
-                if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 1:
-                    li[p - 1] = 0
-                    li[p] = 0
-                    li[p + 1] = 0
-            if li[7] == 1 and li[0] == 1 and li[1] == 1:
-                li[7] = 0
-                li[0] = 0
-                li[1] = 0
-            if li[6] == 1 and li[7] == 1 and li[0] == 1:
-                li[6] = 0
-                li[7] = 0
-                li[0] = 0
-        print(li)
-        if li.count(1) == 0:
-            change_dot_0(0, li)
-            break
-        if li.count(1) == 1:
-            change_dot_1(li.index(1), li)
-            break
-        for p in range(1, 7):  # change 2 consecutive 1 into 0 and 0 on the side to 1
-            if li[p - 1] == 0 and li[p] == 1 and li[p + 1] == 1:
-                change_singe_dot(p, li)
-            if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 0:
-                change_singe_dot(p, li)
-            if li[p - 1] == 1 and li[p] == 0 and li[p + 1] == 1:
-                change_singe_dot(p, li)
-        if li.count(1) == 0:
-            change_dot_0(0, li)
-            break
-        if li.count(1) == 1:
-            change_dot_1(li.index(1), li)
-            break
-        for p in range(1, 7):  # change 1 consecutive 1 into 0 and 2 0 on the side to 1
-            if li[p - 1] == 0 and li[p] == 0 and li[p + 1] == 1:
-                change_singe_dot(p, li)
-            # if li[p - 1] == 1 and li[p] == 0 and li[p + 1] == 1:
-            # change_singe_dot(p, li)
-        if li.count(1) == 0:
-            change_dot_0(0, li)
-            break
-        if li.count(1) == 1:
-            change_dot_1(li.index(1), li)
-            break
-        if li.count(1) == 2:
-            # for p in range(1, 6):
-            #     if li[p] == 1 and li[p + 1] == 1 and li[p - 1] == 0:
-            #         change_singe_dot(p, li)
-            #         change_dot_1(li.index(1), li)
-            #         break
-            #     if li[p - 1] == 1 and li[p] == 1 and li[p + 1] == 0:
-            #         change_singe_dot(p, li)
-            #         change_dot_1(li.index(1), li)
-            #         break
-            if li[0] == 1 and li[7] == 1:
-                li[0] = 0
-                li[7] = 0
-                li[1] = 1
-                change_dot_1(1, li)
-                break
-            if li[7] == 1 and li[0] == 0 and li[1] == 1:
-                change_singe_dot(0, li)
-            print(li[0], " ", li[1], ' ', li[2], '\n')
-            print(li[7], " ", " ", ' ', li[3], '\n')
-            print(li[6], " ", li[5], ' ', li[4], '\n')
-        ltext(li)
-
+    print(text)
+    # print(f.StrIntoList(text))
+    f.solve(f.StrIntoList(text))
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -255,7 +124,7 @@ if __name__ == '__main__':
     root = Root()
 
     testFrame = Frame(root, height=500, background="gray")
-    testFrame.grid(row=1, column=1)
+    testFrame.pack()
     # amount_value = IntVar()
 
     l1 = Label(testFrame, text="matrix")
@@ -272,25 +141,95 @@ if __name__ == '__main__':
     b1.bind('<Button-1>', get_dots)
     b1.grid(row=4, column=1, columnspan=2)
 
-    # another frame
-    resultFrame = Frame(root, height=200, background="white")
-    resultFrame.grid(row=2, column=1)
-
     l2 = Label(testFrame, text="place for error message")
     l2.grid(row=1, column=3)
+
+    l5 = Label(testFrame, text="")
+    l5.grid(row=5, column=1)
+
+    # another frame
+    placementFrame = Frame(root, height=200, background="white")
+    placementFrame.pack()
+
+    placementFrame_b1 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(1))
+    # gameFrame_b1.bind('<Button-1>')
+    placementFrame_b1.grid(row=1, column=1)
+
+    placementFrame_b2 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(2))
+    # gameFrame_b2.bind('<Button-1>', get_dots)
+    placementFrame_b2.grid(row=1, column=2)
+
+    placementFrame_b3 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(3))
+    # gameFrame_b3.bind('<Button-1>', get_dots)
+    placementFrame_b3.grid(row=1, column=3)
+
+    placementFrame_b4 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(4))
+    # gameFrame_b4.bind('<Button-1>', get_dots)
+    placementFrame_b4.grid(row=2, column=3)
+
+    placementFrame_b5 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(5))
+    # gameFrame_b5.bind('<Button-1>', get_dots)
+    placementFrame_b5.grid(row=3, column=3)
+
+    placementFrame_b6 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(6))
+    # gameFrame_b6.bind('<Button-1>', get_dots)
+    placementFrame_b6.grid(row=3, column=2)
+
+    placementFrame_b7 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(7))
+    # gameFrame_b7.bind('<Button-1>', get_dots)
+    placementFrame_b7.grid(row=3, column=1)
+
+    placementFrame_b8 = Button(placementFrame, text="ok", height=2, width=3, command=lambda: game_btn_press_single(8))
+    # gameFrame_b8.bind('<Button-1>', get_dots)
+    placementFrame_b8.grid(row=2, column=1)
     # e1 = Entry(textvariable=amount_value)
 
-    l5 = Label(resultFrame, text="")
-    l5.grid(row=2, column=1)
+    placementFrame_btn_solve = Button(placementFrame, text="solve from this position", height=2, width=24,
+                                      command=lambda: solve_from_this_position(placementFrame_b1["text"],placementFrame_b2["text"],placementFrame_b3["text"],placementFrame_b4["text"],
+                                                                             placementFrame_b5["text"],placementFrame_b6["text"],placementFrame_b7["text"],placementFrame_b8["text"]))
 
+    placementFrame_btn_solve.grid(row=4, column=1, columnspan=6)
     # frame with actual game
 
-    gameFrame = Frame(root, height=300, width=300, background="blue")
-    gameFrame.grid(row=1, column=2, rowspan=2)
+    second = Toplevel()
+    second.title("Game itself")
+    second.geometry("500x500")
+    second.focus()  # useless? how do i use this shit
 
-    gameFrame_b1 = Button(gameFrame, text="ok")
-    gameFrame_b1.bind('<Button-1>', get_dots)
-    gameFrame_b1.grid(row=1, column=1, columnspan=2)
+    # gameFrame = Frame(second, height=500, width=500, background="blue", relief="groove")
+    # gameFrame.grid(rowspan=9, columnspan=9)
+
+    gameFrame_b1 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(1))
+    # gameFrame_b1.bind('<Button-1>')
+    gameFrame_b1.grid(row=1, column=1)
+
+    gameFrame_b2 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(2))
+    # gameFrame_b2.bind('<Button-1>', get_dots)
+    gameFrame_b2.grid(row=1, column=2)
+
+    gameFrame_b3 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(3))
+    # gameFrame_b3.bind('<Button-1>', get_dots)
+    gameFrame_b3.grid(row=1, column=3)
+
+    gameFrame_b4 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(4))
+    # gameFrame_b4.bind('<Button-1>', get_dots)
+    gameFrame_b4.grid(row=2, column=3)
+
+    gameFrame_b5 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(5))
+    # gameFrame_b5.bind('<Button-1>', get_dots)
+    gameFrame_b5.grid(row=3, column=3)
+
+    gameFrame_b6 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(6))
+    # gameFrame_b6.bind('<Button-1>', get_dots)
+    gameFrame_b6.grid(row=3, column=2)
+
+    gameFrame_b7 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(7))
+    # gameFrame_b7.bind('<Button-1>', get_dots)
+    gameFrame_b7.grid(row=3, column=1)
+
+    gameFrame_b8 = Button(second, text="ok", height=2, width=3, command=lambda: game_btn_press(8))
+    # gameFrame_b8.bind('<Button-1>', get_dots)
+    gameFrame_b8.grid(row=2, column=1)
 
     # l1.pack()
     # l2.pack()
