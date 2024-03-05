@@ -109,6 +109,7 @@ def game_btn_press_single(num):
         case _:
             return 0
 
+
 def solve_from_this_position(str1, str2, str3, str4, str5, str6, str7, str8):
     text = f"{str1}{str2}{str3}{str4}{str5}{str6}{str7}{str8}"
     text = text.replace("pop", "0")
@@ -117,6 +118,7 @@ def solve_from_this_position(str1, str2, str3, str4, str5, str6, str7, str8):
     print(text)
     # print(f.StrIntoList(text))
     f.solve(f.StrIntoList(text))
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -185,8 +187,14 @@ if __name__ == '__main__':
     # e1 = Entry(textvariable=amount_value)
 
     placementFrame_btn_solve = Button(placementFrame, text="solve from this position", height=2, width=24,
-                                      command=lambda: solve_from_this_position(placementFrame_b1["text"],placementFrame_b2["text"],placementFrame_b3["text"],placementFrame_b4["text"],
-                                                                             placementFrame_b5["text"],placementFrame_b6["text"],placementFrame_b7["text"],placementFrame_b8["text"]))
+                                      command=lambda: solve_from_this_position(placementFrame_b1["text"],
+                                                                               placementFrame_b2["text"],
+                                                                               placementFrame_b3["text"],
+                                                                               placementFrame_b4["text"],
+                                                                               placementFrame_b5["text"],
+                                                                               placementFrame_b6["text"],
+                                                                               placementFrame_b7["text"],
+                                                                               placementFrame_b8["text"]))
 
     placementFrame_btn_solve.grid(row=4, column=1, columnspan=6)
     # frame with actual game
